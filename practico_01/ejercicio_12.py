@@ -6,7 +6,6 @@ base de datos y se quieren combinar estas listas para que luego puedan crearse
 los objetos de la capa de negocio.
 """
 
-
 from typing import Any, List, Tuple
 
 nombre_articulos = ["ventana", "lámpara", "shampoo"]
@@ -19,7 +18,10 @@ def combinar_basico(nombres: List[str], precios: List[float]) -> Tuple[Any]:
 
     Restricción: Resolver utilizando un bucle for.
     """
-    pass # Completar
+    tupla: Tuple[Tuple[str, float]] = ()
+    for i in range(len(nombres)):
+        tupla += ((nombres[i], precios[i]),)
+    return tupla
 
 
 # NO MODIFICAR - INICIO
@@ -43,7 +45,10 @@ def combinar_enumerate(nombres: List[str], precios: List[float], ids: List[int])
     """Re-Escribir utilizando enumerate y agregando un nuevo componente.
     Referencia: https://docs.python.org/3/library/functions.html#enumerate
     """
-    pass # Completar
+    tupla: Tuple[Tuple[str, float, int]] = ()
+    for count, value in enumerate(nombres):
+        tupla += ((nombres[count], precios[count], ids[count]),)
+    return tupla
 
 
 # NO MODIFICAR - INICIO
@@ -67,8 +72,10 @@ def combinar_zip(nombres: List[str], precios: List[float], ids: List[int]) -> Tu
     """Re-Escribir utilizando zip.
     Referencia: https://docs.python.org/3/library/functions.html#zip
     """
-    pass # Completar
-
+    tupla: Tuple[Tuple[str, float, int]] = ()
+    for elem in zip(nombres, precios, ids):
+        tupla += (elem,)
+    return tupla
 
 # NO MODIFICAR - INICIO
 respuesta = (
@@ -93,8 +100,10 @@ def combinar_zip_args(*args) -> Tuple[Any]:
     """Re-Escribir utilizando zip y una cantidad arbitraria de componentes.
     Referencia: https://docs.python.org/3/tutorial/controlflow.html#unpacking-argument-lists
     """
-    pass # Completar
-
+    tupla: Tuple[Tuple[str, float, int]] = ()
+    for elem in zip(*args):
+        tupla += (elem,)
+    return tupla
 
 # NO MODIFICAR - INICIO
 respuesta = (
