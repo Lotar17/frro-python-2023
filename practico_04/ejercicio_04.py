@@ -15,11 +15,16 @@ def buscar_persona(id_persona):
     conn = sqlite3.connect("databaseEj4.db")
     cur = conn.cursor()
     res = cur.execute("SELECT * FROM Persona per WHERE idPersona = ?", (id_persona,)).fetchone()
+    idper, nombre, nac, dni, altura = res
+    nac = datetime.datetime.strptime(nac, "%Y-%m-%d %H:%M:%S")
+    print(res)
+    resultado = (idper, nombre, nac, dni, altura)
+    print(resultado)
     conn.commit()
     cur.close()
     conn.close()
 
-    return res if res is not None else None
+    return resultado if resultado is not None else None
 
 
 
@@ -27,12 +32,7 @@ def buscar_persona(id_persona):
 @reset_tabla
 def pruebas():
     juan = buscar_persona(agregar_persona('juan perez', datetime.datetime(1988, 5, 15), 32165498, 180))
-    juan2=(6, 'juan perez', datetime.datetime(1988, 5, 15), 32165498, 180)
-    print(juan)
-    print(type(juan))
-    print(juan2)
-    print(type(juan2))
-    assert juan == juan2
+    assert juan == (1, 'juan perez', datetime.datetime(1988, 5, 15), 32165498, 180)
     assert buscar_persona(12345) is False
 
 if __name__ == '__main__':
