@@ -1,7 +1,8 @@
 GridLayout:
-    rows: 5
-    padding: 20
-    spacing: [10,5]
+    rows: 6
+    padding: 10
+    cols: 2
+    spacing: [1,1]
 
 
     Label:
@@ -9,9 +10,11 @@ GridLayout:
         font_size: 20
         color : 1, 1, 1, 1
         text: "Nombre"
-        halign: "left"
-        valign: "top"
+        halign: "center"
+        valign: "middle"
         text_size: self.size
+        size_hint: 0.3, None
+        height: "60dp"
 
 
 
@@ -19,27 +22,85 @@ GridLayout:
         id: txt_nombre
         multiline: False
         text_size: self.size
-        size_hint: (None,None)
-        size_hint_x: 1
-        size: (0,40)
         padding: 10
-        valign: "top"
+        size_hint: 0.3, None
+        height: "60dp"
+
 
     Label:
         id: lbl_apellido
         font_size: 20
         color : 1, 1, 1, 1
         text: "Apellido"
-        halign: "left"
-        valign: "top"
+        halign: "center"
+        valign: "middle"
         text_size: self.size
+        size_hint: 0.3, None
+        height: "60dp"
 
     TextInput:
         id: txt_apellido
         multiline: False
         text_size: self.size
-        size_hint: (None,None)
-        size_hint_x: 1
-        size: (0,40)
         padding: 10
-        valign: "top"
+        valign: "middle"
+        size_hint: 0.3, None
+        height: "60dp"
+
+
+    Label:
+        id: lbl_mail
+        font_size: 20
+        color : 1, 1, 1, 1
+        text: "Dirección de correo electrónico"
+        halign: "center"
+        valign: "middle"
+        text_size: self.size
+        size_hint: 0.3, None
+        height: "60dp"
+
+
+    TextInput:
+        id: txt_mail
+        multiline: False
+        text_size: self.size
+        padding: 10
+        valign: "middle"
+        size_hint: 0.3, None
+        height: "60dp"
+
+    Label:
+        id: lbl_contrasena
+        font_size: 20
+        color : 1, 1, 1, 1
+        text: "Contraseña"
+        halign: "center"
+        valign: "middle"
+        text_size: self.size
+        size_hint: 0.3, None
+        height: "60dp"
+
+    TextInput:
+        id: txt_contrasena
+        multiline: False
+        text_size: self.size
+        padding: 10
+        valign: "middle"
+        size_hint: 0.3, None
+        height: "60dp"
+
+    Button:
+        id: btn_enviar
+        text: "ENVIAR"
+        col_span: 2
+        size_hint: 0.3, None
+        height: "60dp"
+
+
+    ProgressBar:
+        id: pgb_formulario
+        max: 4
+        value: 0
+        col_span: 2
+        size_hint: 0.3, None
+        height: "60dp"
