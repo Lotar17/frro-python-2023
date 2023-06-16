@@ -11,7 +11,7 @@ from practico_04.ejercicio_04 import buscar_persona
 def actualizar_persona(id_persona, nombre, nacimiento, dni, altura):
     """Implementar la funcion actualizar_persona, que actualiza un registro de
     una persona basado en su id. Devuelve un booleano en base a si encontro el
-    registro y lo actualizo o no."""
+    registro y lo actualizo o no. USAR DATETIME.STPTIME PARA LA FECHA"""
 
     conn = sqlite3.connect("databaseEj4.db")
     cur = conn.cursor()

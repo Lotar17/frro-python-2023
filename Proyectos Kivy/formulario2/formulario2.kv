@@ -1,0 +1,55 @@
+ScreenManager:
+    Screen:
+        name: "Pantalla 1"
+        BoxLayout:
+            orientation: "vertical"
+            padding: 20
+            canvas:
+                Color:
+                    rgb: [0,0,5,0]
+            Label:
+                text: "Nombre"
+                halign: "left"
+            TextInput:
+                id: txt_nombre
+                halign: "center"
+                on_text_validate: barra_progreso.value += 1
+                multiline: False
+            Label:
+                text: "Apellido"
+                halign: "left"
+            TextInput:
+                id: txt_apellido
+                halign: "center"
+                multiline: False
+                on_text_validate: barra_progreso.value += 1
+            Label:
+                text: "Dirección de correo electronico"
+                halign: "left"
+            TextInput:
+                multiline: False
+                halign: "center"
+                on_text_validate: barra_progreso.value += 1
+            Label:
+                text: "Contraseña"
+                halign: "left"
+            TextInput:
+                multiline: False
+                halign: "center"
+                on_text_validate: barra_progreso.value += 1
+
+            ProgressBar:
+                id: barra_progreso
+                max: 4
+                value: 0
+            Button:
+                text: "ACEPTAR"
+                on_press:
+                    root.transition.direction = "up"
+                    root.current = "Pantalla 2"
+
+    Screen:
+        name: "Pantalla 2"
+        BoxLayout:
+            Label:
+                text: "Bienvenido " + txt_nombre.text + " " + txt_apellido.text
