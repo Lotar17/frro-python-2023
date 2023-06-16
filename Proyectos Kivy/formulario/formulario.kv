@@ -1,0 +1,45 @@
+GridLayout:
+    rows: 5
+    padding: 20
+    spacing: [10,5]
+
+
+    Label:
+        id: lbl_nombre
+        font_size: 20
+        color : 1, 1, 1, 1
+        text: "Nombre"
+        halign: "left"
+        valign: "top"
+        text_size: self.size
+
+
+
+    TextInput:
+        id: txt_nombre
+        multiline: False
+        text_size: self.size
+        size_hint: (None,None)
+        size_hint_x: 1
+        size: (0,40)
+        padding: 10
+        valign: "top"
+
+    Label:
+        id: lbl_apellido
+        font_size: 20
+        color : 1, 1, 1, 1
+        text: "Apellido"
+        halign: "left"
+        valign: "top"
+        text_size: self.size
+
+    TextInput:
+        id: txt_apellido
+        multiline: False
+        text_size: self.size
+        size_hint: (None,None)
+        size_hint_x: 1
+        size: (0,40)
+        padding: 10
+        valign: "top"
