@@ -8,14 +8,21 @@ from typing import List, Optional
 
 class DatosSocio():
 
+
     def __init__(self):
-        pass # Completar
+        self.__engine = create_engine("sqlite:///home/lkblkb/repos/frro-python-2023/practico_05")
 
     def buscar(self, id_socio: int) -> Optional[Socio]:
         """Devuelve la instancia del socio, dado su id. Devuelve None si no 
         encuentra nada.
         """
-        pass # Completar
+        Session = sessionmaker()
+        local_session = Session(bind = self.__engine)
+        users = local_session.query(Socio).filter(Socio.id_socio == id_socio)
+        return users if users is not None else None
+
+
+
 
     def buscar_dni(self, dni_socio: int) -> Optional[Socio]:
         """Devuelve la instancia del socio, dado su dni. Devuelve None si no 

@@ -1,0 +1,88 @@
+ScreenManager:
+    Screen:
+        name: "Menu"
+        BoxLayout:
+            orientation: "vertical"
+            padding: 20
+            canvas:
+                Color:
+                    rgb: [0,0,5,0]
+            Button:
+                text: "Crear usuario"
+                on_press:
+                    root.current = "Create"
+            Button:
+                text: "Modificar usuario"
+                on_press:
+                    root.current = "Edit"
+            Button:
+                text: "Eliminar usuario"
+            Button:
+                text: "Salir"
+                on_press: app.stop()
+    Screen:
+        name: "Create"
+        BoxLayout:
+            orientation: "vertical"
+            padding: 20
+            canvas:
+                Color:
+                    rgb: [0,0,5,0]
+            Label:
+                text: "Nombre"
+                halign: "left"
+            TextInput:
+                id: txt_nombre
+                halign: "center"
+                on_text_validate: barra_progreso.value += 1
+                multiline: False
+            Label:
+                text: "Apellido"
+                halign: "left"
+            TextInput:
+                id: txt_apellido
+                halign: "center"
+                multiline: False
+                on_text_validate: barra_progreso.value += 1
+            Label:
+                text: "Dirección de correo electronico"
+                halign: "left"
+            TextInput:
+                multiline: False
+                halign: "center"
+                on_text_validate: barra_progreso.value += 1
+            Label:
+                text: "Contraseña"
+                halign: "left"
+            TextInput:
+                multiline: False
+                halign: "center"
+                on_text_validate: barra_progreso.value += 1
+
+            ProgressBar:
+                id: barra_progreso
+                max: 4
+                value: 0
+            Button:
+                text: "ACEPTAR"
+                on_press:
+                    root.transition.direction = "left"
+                    root.current = "Pantalla 2"
+            Button:
+                text: "Volver"
+                on_press:
+                    root.transition.direction = "right"
+                    root.current = "Menu"
+    Screen:
+        name: "Edit"
+
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: "Buscar por id"
+                halign: "left"
+            TextInput:
+                multiline: False
+                size_hint_y: None
+                height: '32dp'
+                halign: "center"
