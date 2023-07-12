@@ -3,6 +3,7 @@ ScreenManager:
         name: "Pantalla 1"
         BoxLayout:
             orientation: "vertical"
+            id: primer
             padding: 20
             canvas:
                 Color:
@@ -10,33 +11,49 @@ ScreenManager:
             Label:
                 text: "Nombre"
                 halign: "left"
+                font_size: 40
+                valign: "middle"
             TextInput:
                 id: txt_nombre
                 halign: "center"
+                font_size: 30
+                valign: "middle"
                 on_text_validate: barra_progreso.value += 1
                 multiline: False
             Label:
                 text: "Apellido"
                 halign: "left"
+                font_size: 40
+                valign: "middle"
             TextInput:
                 id: txt_apellido
                 halign: "center"
                 multiline: False
                 on_text_validate: barra_progreso.value += 1
+                font_size: 30
+                valign: "middle"
             Label:
                 text: "Dirección de correo electronico"
                 halign: "left"
+                font_size: 40
+                valign: "middle"
             TextInput:
                 multiline: False
                 halign: "center"
                 on_text_validate: barra_progreso.value += 1
+                font_size: 30
+                valign: "middle"
             Label:
                 text: "Contraseña"
                 halign: "left"
+                font_size: 40
+                valign: "middle"
             TextInput:
                 multiline: False
                 halign: "center"
-                on_text_validate: barra_progreso.value += 1
+                on_text_validate: barra_progreso.value  += 1
+                font_size: 30
+                valign: "middle"
 
             ProgressBar:
                 id: barra_progreso
@@ -52,4 +69,4 @@ ScreenManager:
         name: "Pantalla 2"
         BoxLayout:
             Label:
-                text: "Bienvenido " + txt_nombre.text + " " + txt_apellido.text
+                text: app.buscar(txt_nombre.text)

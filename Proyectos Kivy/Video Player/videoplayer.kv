@@ -1,0 +1,73 @@
+ScreenManager:
+    Screen:
+        name: "Menu"
+        BoxLayout:
+            padding: 20
+            orientation: "vertical"
+            Label:
+                id: "lista"
+                size_hint_y: 0.9
+            GridLayout:
+                size_hint_y: 0.1
+                rows: 1
+                cols: 2
+                Button:
+                    text: "Cargar Video"
+                    on_press:
+                        root.current = "Alta"
+                Button:
+                    text: "Salir"
+
+    Screen:
+        name: "Alta"
+        GridLayout:
+            cols: 2
+            rows: 1
+            BoxLayout:
+                orientation: "vertical"
+                padding: 60
+                Label:
+                    text: "Nombre"
+                    text_size: self.size
+                    halign: "left"
+                    valign: "middle"
+                TextInput:
+
+                Label:
+                    text: "Descripcion"
+                    text_size: self.size
+                    halign: "left"
+                    valign: "middle"
+                TextInput
+                Label:
+                    text: "Propietario"
+                    text_size: self.size
+                    halign: "left"
+                    valign: "middle"
+                TextInput:
+                    multiline: False
+                Label:
+                    text: "Ruta"
+                    text_size: self.size
+                    halign: "left"
+                    valign: "middle"
+                TextInput:
+                    id:route
+                    multiline: False
+                    valign: ""
+                Button:
+                    text: "Seleccione un archivo"
+                    on_press:
+                        root.current = "chooser"
+            BoxLayout:
+                orientation: "vertical"
+                Label
+                Button:
+
+    Screen:
+        name: "chooser"
+        FileChooserListView:
+            id: filechooser
+            on_selection:
+                route.text = self.selection and self.selection[0] or ''
+                root.current = "Alta"
