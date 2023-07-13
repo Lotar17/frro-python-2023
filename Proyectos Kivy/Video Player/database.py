@@ -4,7 +4,6 @@ from video import Video
 
 class VideoDAO:
     def crear_tabla(self):
-
         conn = sqlite3.connect("VideoPlayer.db")
         cur = conn.cursor()
         cur.execute("""
@@ -19,20 +18,17 @@ class VideoDAO:
         cur.close()
         conn.close()
 
-
-
-
-    def cargar_video(self, video : Video):
-        vid = ({"nombre": video.nombre, "descripcion": video.descripcion, "propietario": video.propietario, "route": video.route})
+    def cargar_video(self, video: Video):
+        vid = ({"nombre": video.nombre, "descripcion": video.descripcion, "propietario": video.propietario,
+                "route": video.route})
         conn = sqlite3.connect("VideoPlayer.db")
         cur = conn.cursor()
-        cur.execute("INSERT INTO Video(nombre, descripcion, propietario, route) VALUES (:nombre, :descripcion, :propietario, :route)", vid)
+        cur.execute(
+            "INSERT INTO Video(nombre, descripcion, propietario, route) VALUES (:nombre, :descripcion, :propietario, :route)",
+            vid)
         conn.commit()
         cur.close()
         conn.close()
-
-
-
 
     def listar(self):
         conn = sqlite3.connect("VideoPlayer.db")
@@ -42,14 +38,12 @@ class VideoDAO:
         videos = []
         for resultado in resultados:
             idVideo, nombre, descripcion, propietario, route = resultado
-            video = Video(nombre,descripcion,propietario,route)
+            video = Video(nombre, descripcion, propietario, route)
             videos.append(video)
         cur.close()
         conn.close()
 
         return videos
-
-
 
     def borrar_tabla(self):
         conn = sqlite3.connect("VideoPlayer.db")

@@ -6,7 +6,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.videoplayer import VideoPlayer
 from database import VideoDAO
-
+from video import Video
 
 class VideoPlayerApp(App):
 
@@ -31,6 +31,11 @@ class VideoPlayerApp(App):
         player.options = {"eos": "loop"}
         player.alow_stretch = True
         return player
+
+    def cargar_video(self, nombre : str, descripcion : str, propietario : str, route : str):
+        video = Video(nombre, descripcion, propietario, route)
+        videoDao = VideoDAO()
+        videoDao.cargar_video(video)
 
 if __name__ == "__main__" :
     VideoPlayerApp().run()
