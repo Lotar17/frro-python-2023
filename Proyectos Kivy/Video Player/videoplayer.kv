@@ -1,12 +1,28 @@
+<ButtonCustom@Button>:
+    text: "Botón con Imagen"
+    size_hint: None, None
+    size: 200, 200
+    padding: 10
+    Image:
+        source: 'path/to/image.png'
+        size_hint: 0.8, 0.8
+        pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+    Label:
+        text: "Texto del Botón"
+        size_hint: 1, 0.2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+
+
 ScreenManager:
     Screen:
         name: "Menu"
         BoxLayout:
             padding: 20
             orientation: "vertical"
-            Label:
-                id: "lista"
+            GridLayout:
+                id: lista
                 size_hint_y: 0.9
+                cols: 4
             GridLayout:
                 size_hint_y: 0.1
                 rows: 1
@@ -17,6 +33,10 @@ ScreenManager:
                         root.current = "Alta"
                 Button:
                     text: "Salir"
+                    on_press:
+                        root.current = "player"
+                        salir.state = "play"
+
 
     Screen:
         name: "Alta"
@@ -71,3 +91,20 @@ ScreenManager:
             on_selection:
                 route.text = self.selection and self.selection[0] or ''
                 root.current = "Alta"
+
+    Screen:
+        name: "player"
+        BoxLayout:
+            orientation: "vertical"
+            VideoPlayer:
+                id: salir
+                size_hint_y: 0.9
+                source: "Videos TPI/rick-astley.mp4"
+                options: {"eos" : "loop"}
+                allow_stretch: True
+            Button:
+                size_hint_y: 0.1
+                text: "Volver"
+                on_press:
+                    root.current = "Menu"
+                    salir.state = "stop"
