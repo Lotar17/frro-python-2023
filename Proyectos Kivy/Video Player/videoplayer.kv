@@ -1,3 +1,30 @@
+<VideoItem@BoxLayout>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: 100
+
+    Image:
+        texture: self.video.thumb.texture
+
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: f"Nombre: {self.video.nombre}"
+        Label:
+            text: f"Descripción: {self.video.descripcion}"
+        Label:
+            text: f"Propietario: {self.video.propietario}"
+
+<VideoList@RecycleView>:
+    viewclass: 'VideoItem'
+    bar_width: '10dp'
+    effect_cls: 'ScrollEffect'
+
+    RecycleBoxLayout:
+        orientation: 'vertical'
+        size_hint_y: None
+        height: self.minimum_height
+
 <ButtonCustom@Button>:
     text: "Botón con Imagen"
     size_hint: None, None
@@ -88,6 +115,8 @@ ScreenManager:
         name: "chooser"
         FileChooserListView:
             id: filechooser
+            path: app.defaultPath()
+            filters: ['*.mp4','*.mkv']
             on_selection:
                 route.text = self.selection and self.selection[0] or ''
                 root.current = "Alta"
@@ -108,3 +137,16 @@ ScreenManager:
                 on_press:
                     root.current = "Menu"
                     salir.state = "stop"
+    Screen:
+        name: "lista de videos"
+        BoxLayout:
+            id: lista
+            VideoList:
+                id: video_list
+        BoxLayout:
+            id: botones
+            Button:
+                size_hint_y: 0.1
+                text: "Volver"
+                on_press:
+                    root.current = "Menu"
