@@ -16,18 +16,26 @@ ScreenManager:
             GridLayout:
                 id: grilla
                 cols: 4
-                size_hint_y: 0.9
+                size_hint_y: 0.7
                 spacing: 20
             GridLayout:
-                size_hint_y: 0.1
-                rows: 1
+                size_hint_y: 0.3
+                rows: 12
                 cols: 2
                 Button:
                     text: "Cargar Video"
-                    background_color: (1.0, 0.5, 0.0, 1.0)
+                    background_color: (0,1,0,1)
                     color: 1, 1, 1, 1
                     on_press:
                         root.current = "Alta"
+                Button:
+                    text: "Borrar Video"
+                    background_color: (1,0,0,1)
+                    on_press:
+                        root.current = "Baja"
+                Button:
+                    text: "Modificar Video"
+                    background_color: (0,0,1,1)
                 Button:
                     text: "Salir"
                     on_press:
@@ -51,6 +59,7 @@ ScreenManager:
                     id: name
                     size_hint_y: None
                     height: max(self.minimum_height, self.line_height)
+                    multiline: False
 
                 Label:
                     text: "Descripcion"
@@ -61,6 +70,7 @@ ScreenManager:
                     size_hint_y: None
                     height: max(self.minimum_height, self.line_height)
                     id: desc
+                    multiline: False
                 Label:
                     text: "Propietario"
                     text_size: self.size
@@ -82,6 +92,7 @@ ScreenManager:
                     height: max(self.minimum_height, self.line_height)
                     multiline: False
                     valign: ""
+                    multiline: False
                 Button:
                     text: "Seleccione un archivo"
                     background_color: (1.0, 0.5, 0.0, 1.0)
@@ -132,3 +143,30 @@ ScreenManager:
                     root.current = "Menu"
                     salir.state = "stop"
                     app.build()
+
+    Screen:
+        name: "Baja"
+        BoxLayout:
+            orientation: "vertical"
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: 0.8
+                padding: 20
+                spacing: 10
+                Label:
+                    size: self.texture_size
+                    text: "Ingrese el nombre del video a borrar"
+                    text_size: self.size
+                    halign: "left"
+                    valign: "middle"
+                TextInput:
+                    size_hint_y: None
+                    valign: "middle"
+                    height: max(self.minimum_height, self.line_height)
+                    multiline: False
+            BoxLayout:
+                size_hint_y: 0.2
+                Button:
+                    text: "Volver"
+                    on_press:
+                        root.current = "Menu"

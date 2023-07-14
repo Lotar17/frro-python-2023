@@ -38,7 +38,7 @@ class VideoDAO:
         videos = []
         for resultado in resultados:
             idVideo, nombre, descripcion, propietario, route = resultado
-            video = Video(nombre, descripcion, propietario, route)
+            video = Video(idVideo, nombre, descripcion, propietario, route)
             videos.append(video)
         cur.close()
         conn.close()

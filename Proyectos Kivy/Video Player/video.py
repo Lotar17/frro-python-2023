@@ -1,13 +1,15 @@
 from moviepy.editor import VideoFileClip
 from PIL import Image as Image
 
+
 class Video:
 
-    def __init__(self, nombre = None, descripcion = None, propietario = None, route = None):
+    def __init__(self, idVideo=None, nombre=None, descripcion=None, propietario=None, route=None):
         self.nombre = nombre
         self.descripcion = descripcion
         self.propietario = propietario
         self.route = route
+        self.idVideo = idVideo
     ##     self.thumb = self.setThumbnail()    SETEAR FRAME DEL VIDEO
 
 
@@ -20,4 +22,3 @@ class Video:
         thumbnail = thumbnail.resize((320, 240), reducing_gap=True)
         return thumbnail
 """
-
