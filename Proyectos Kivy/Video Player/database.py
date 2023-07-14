@@ -30,6 +30,45 @@ class VideoDAO:
         cur.close()
         conn.close()
 
+    def delete_one(self, route: str):
+        conn = sqlite3.connect("VideoPlayer.db")
+        cur = conn.cursor()
+        cur.execute("DELETE FROM Video WHERE route = ?", (route,))
+        if cur.rowcount > 0:
+            borro = True
+        else:
+            borro = False
+        conn.commit()
+        cur.close()
+        conn.close()
+        return borro
+
+
+    def getOne(self, route):
+        conn = sqlite3.connect("VideoPlayer.db")
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM Video WHERE route = ?", (route,))
+        resultado = cur.fetchone()
+        if resultado:
+            idVideo, nombre, descripcion, propietario, ruta = resultado
+            conn.commit()
+            video = Video(idVideo, nombre, descripcion, propietario, ruta)
+        else:
+            video = None
+        cur.close()
+        conn.close()
+        return video
+
+    def updateOne(self,video : Video):
+        conn = sqlite3.connect("VideoPlayer.db")
+        cur = conn.cursor()
+        cur.execute("UPDATE Video SET nombre = ?, descripcion = ?, propietario = ? WHERE route = ?", (video.nombre,video.descripcion, video.propietario, video.route))
+        resultado = True if cur.rowcount > 0 else False
+        conn.commit()
+        cur.close()
+        conn.close()
+        return resultado
+
     def listar(self):
         conn = sqlite3.connect("VideoPlayer.db")
         cur = conn.cursor()

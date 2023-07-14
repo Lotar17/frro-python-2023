@@ -20,7 +20,7 @@ ScreenManager:
                 spacing: 20
             GridLayout:
                 size_hint_y: 0.3
-                rows: 12
+                rows: 2
                 cols: 2
                 Button:
                     text: "Cargar Video"
@@ -36,11 +36,12 @@ ScreenManager:
                 Button:
                     text: "Modificar Video"
                     background_color: (0,0,1,1)
+                    on_press:
+                        root.current = "Modificacion"
                 Button:
                     text: "Salir"
                     on_press:
-                        root.current = "player"
-                        salir.state = "play"
+                        app.stop()
 
     Screen:
         name: "Alta"
@@ -146,27 +147,138 @@ ScreenManager:
 
     Screen:
         name: "Baja"
+        canvas:
+            Color:
+                rgba: 0,0,0,0
+            Rectangle:
+                pos: self.pos
+                size: self.size
         BoxLayout:
             orientation: "vertical"
             BoxLayout:
                 orientation: "vertical"
-                size_hint_y: 0.8
-                padding: 20
-                spacing: 10
+                size_hint_y: 0.7
+                padding: 10
                 Label:
-                    size: self.texture_size
-                    text: "Ingrese el nombre del video a borrar"
+                    text: "Ingrese la ruta del video a borrar"
+                    text_size: self.size
+                    halign: "left"
+                    valign: "middle"
+                    font_size: 24
+
+                TextInput:
+                    size_hint_y: None
+                    valign: "middle"
+                    id: ruta_a_borrar
+                    height: max(self.minimum_height, self.line_height)
+                    multiline: False
+                Button:
+                    text: "Seleccione un archivo"
+                    on_press:
+                        root.current = "chooser"
+                Label:
+                    id: resultado_borrado
+                    text_size: self.size
+                    halign: "left"
+                    valign: "middle"
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: 0.3
+                Button:
+                    text: "BORRAR"
+                    background_color: (1,0,0,1)
+                    on_press:
+                        resultado_borrado.text = "Video borrado con exito" if app.borrar_video(ruta_a_borrar.text) == True else "El video no existe en la base de datos, intente nuevamente"
+                Button:
+                    text: "Volver"
+                    on_press:
+                        app.build()
+                        root.current = "Menu"
+
+
+    Screen:
+        name: "Modificacion"
+        BoxLayout:
+            orientation: "vertical"
+            BoxLayout:
+                size_hint_y: 0.6
+                orientation: "vertical"
+                padding: 20
+                Label:
+                    text: "Nombre"
+                    text_size: self.size
+                    halign: "left"
+                    valign: "middle"
+                TextInput:
+                    id: m_name
+                    size_hint_y: None
+                    height: max(self.minimum_height, self.line_height)
+                    multiline: False
+
+                Label:
+                    text: "Descripcion"
                     text_size: self.size
                     halign: "left"
                     valign: "middle"
                 TextInput:
                     size_hint_y: None
+                    height: max(self.minimum_height, self.line_height)
+                    id: m_desc
+                    multiline: False
+                Label:
+                    text: "Propietario"
+                    text_size: self.size
+                    halign: "left"
                     valign: "middle"
+                TextInput:
+                    id: m_prop
+                    size_hint_y: None
                     height: max(self.minimum_height, self.line_height)
                     multiline: False
-            BoxLayout:
-                size_hint_y: 0.2
+                Label:
+                    text: "Ruta"
+                    text_size: self.size
+                    halign: "left"
+                    valign: "middle"
+                TextInput:
+                    id:m_route
+                    size_hint_y: None
+                    height: max(self.minimum_height, self.line_height)
+                    multiline: False
+                    valign: ""
+                    multiline: False
+                    on_text_validate:
+                        m_route.text.strip()
                 Button:
-                    text: "Volver"
+                    text: "Seleccione un archivo"
+                    background_color: (1.0, 0.5, 0.0, 1.0)
                     on_press:
+                        root.current = "chooser"
+                Label:
+                    id: resultado_mod
+            BoxLayout:
+                size_hint_y: 0.4
+                orientation: "vertical"
+                Button:
+                    text: "Buscar por ruta"
+                    on_press:
+                        vid = app.getOne(m_route.text)
+                        m_name.text = vid.get("nombre")
+                        m_desc.text = vid.get("descripcion")
+                        m_prop.text = vid.get("propietario")
+                        m_route.text = vid.get("route")
+
+                Button:
+                    text: "GUARDAR"
+                    background_color: (0.0, 1.0, 0.0, 1.0)
+                    on_press:
+                        res = app.updateVideo(m_name.text, m_desc.text,m_prop.text, m_route.text)
+                        resultado_mod.text = "Video Modificado con exito" if res == True else "Modificacion fallida, ingrese una ruta correcta"
+
+                Button:
+                    text: "VOLVER"
+                    on_press:
+                        m_name.text = m_desc.text = m_prop.text = m_route.text = ""
+                        app.build()
                         root.current = "Menu"
+

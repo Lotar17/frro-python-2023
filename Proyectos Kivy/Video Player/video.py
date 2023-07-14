@@ -1,5 +1,4 @@
-from moviepy.editor import VideoFileClip
-from PIL import Image as Image
+
 
 
 class Video:

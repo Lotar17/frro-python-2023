@@ -70,6 +70,26 @@ class VideoPlayerApp(App):
         videoDao = VideoDAO()
         videoDao.cargar_video(video)
 
+    def borrar_video(self, route : str):
+        videoDB = VideoDAO()
+        borro = videoDB.delete_one(route)
+        return borro
+
+    def getOne(self, route: str):
+        videoDB = VideoDAO()
+        video = videoDB.getOne(route)
+        if video is not None:
+            return {"nombre": video.nombre, "descripcion": video.descripcion, "propietario": video.propietario, "route": video.route}
+        else:
+            return {"nombre": "<vacio>", "descripcion": "<vacio>", "propietario": "<vacio>", "route": "<vacio>"}
+
+    def updateVideo(self, nombre: str, descripcion : str, prop : str,route : str):
+        video = Video(nombre, descripcion, prop, route)
+        videoDB = VideoDAO()
+        resultado = videoDB.updateOne(video)
+        return resultado
+
+
 
 if __name__ == "__main__":
     VideoPlayerApp().run()
