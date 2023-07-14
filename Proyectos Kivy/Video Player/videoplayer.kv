@@ -96,10 +96,12 @@ ScreenManager:
                     on_press:
                         app.cargar_video(name.text, desc.text, prop.text, route.text)
                         name.text = desc.text = prop.text = route.text = ""
+                        app.build()
                         root.current = "Menu"
                 Button:
                     text: "VOLVER"
                     on_press:
+                        app.build()
                         root.current = "Menu"
 
 
@@ -107,6 +109,8 @@ ScreenManager:
         name: "chooser"
         FileChooserListView:
             id: filechooser
+            path: app.defaultPath()
+            filters: ['*.mp4','*.mkv']
             on_selection:
                 route.text = self.selection and self.selection[0] or ''
                 root.current = "Alta"
@@ -127,3 +131,4 @@ ScreenManager:
                 on_press:
                     root.current = "Menu"
                     salir.state = "stop"
+                    app.build()

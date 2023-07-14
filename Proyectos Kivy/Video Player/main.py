@@ -12,6 +12,7 @@ from kivy.uix.label import Label
 from kivy.uix.videoplayer import VideoPlayer
 from database import VideoDAO
 from video import Video
+from pathlib import Path
 
 
 class ImageButton(ButtonBehavior, BoxLayout):
@@ -21,32 +22,33 @@ class ImageButton(ButtonBehavior, BoxLayout):
 
 class VideoPlayerApp(App):
 
+
+    def reproducirVideo(self, video : Video):
+        app = App.get_running_app()
+        app.root.ids.salir.source = video.route
+        app.root.current = "player"
+        app.root.ids.salir.state = "play"
+
     def build(self):
         registros = self.findAll()
 
-        grid = GridLayout(cols=4, size_hint_y = 0.9, spacing = 20)
+        self.root.ids.grilla.clear_widgets()
+
 
         for registro in registros:
             button = ImageButton()
             button.size_hint = (None, None)
             button.size = (200,200)
             button.orientation = "vertical"
-            button.add_widget(Image(source="ImagenesTPI/mariposa.jpg"))
+            button.add_widget(Image(source = "ImagenesTPI/mariposa.jpg"))
             button.add_widget(Label(text = registro.nombre))
+            button.bind(on_press = lambda *args, registro=registro: self.reproducirVideo(registro))
             self.root.ids.grilla.add_widget(button)
 
-
-
-
-    def generar_grilla(self, grid, icono : ImageButton):
-        lista = self.findAll()
-        grid = GridLayout(cols = 4)
-        for i in range(lista.count() - 1):
-            ic = copy.copy(icono)
-            ic.add_widget(Image(source="ImagenesTPI/mariposa.jpg"))
-            ic.add_widget(Label(text=lista[i].nombre))
-            grid.add_widget(ic)
-        return grid
+    def defaultPath(self):
+        path = Path.home() / "documents" / "videoapp"
+        path.mkdir(parents=True, exist_ok=True)
+        return str(path)
 
 
     def findAll(self):
@@ -60,6 +62,8 @@ class VideoPlayerApp(App):
         player.options = {"eos": "loop"}
         player.alow_stretch = True
         return player
+
+
 
     def cargar_video(self, nombre: str, descripcion: str, propietario: str, route: str):
         video = Video(nombre, descripcion, propietario, route)
