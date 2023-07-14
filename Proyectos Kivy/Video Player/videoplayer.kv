@@ -1,25 +1,4 @@
-<ButtonWithImageAndText@Button>:
-    size_hint: None, None
-    size: 200, 200
-    BoxLayout:
-        orientation: "vertical"
-        Image:
-            source: 'ImagenesTPI/mariposa.jpg'
-            size_hint: 0.8, 0.8
-            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
-        Label:
-            text: "Texto del Botón"
-            size_hint: 1, 0.2
-            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
 
-<ImageButton>:
-    size_hint: None, None
-    size: 200, 200
-    orientation: 'vertical'
-    Image:
-        source: 'ImagenesTPI/mariposa.jpg'
-    Label:
-        text: 'Texto del botón'
 
 
 ScreenManager:
@@ -35,15 +14,10 @@ ScreenManager:
             padding: 20
             orientation: "vertical"
             GridLayout:
-                id: lista
-                size_hint_y: 0.9
+                id: grilla
                 cols: 4
+                size_hint_y: 0.9
                 spacing: 20
-                ImageButton
-                    on_press:
-                        root.current = "Alta"
-                ImageButton
-                ImageButton
             GridLayout:
                 size_hint_y: 0.1
                 rows: 1
@@ -59,7 +33,6 @@ ScreenManager:
                     on_press:
                         root.current = "player"
                         salir.state = "play"
-
 
     Screen:
         name: "Alta"
