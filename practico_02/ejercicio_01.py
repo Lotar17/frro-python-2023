@@ -5,7 +5,7 @@ https://youtu.be/A47sszUdTsM
 
 
 En este archivo se deben importar los módulos:
-- main.py as main
+- PersonaDAO.py as main
 - source/util.py as util
 - source/controller/controller.py as controller
 

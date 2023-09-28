@@ -4,7 +4,7 @@
 - ../data/database.py as database
 - ../tests/test_config.py as test_config
 - ../tests/load_tests/ddos_simulation.py as ddos_simulation
-- ../../main.py as main
+- ../../PersonaDAO.py as main
 
 Los imports deben hacerse de forma tal que funcionen con el siguiente
 comando (estando parados dentro de la carpeta practico_02):
