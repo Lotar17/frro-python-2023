@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block banner %}
+  <div id="index-banner" class="parallax-container" style="background-image:linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%)">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center white-text">Encuentra la pelicula que desees, aquí</h1>
+        <div class="row">
+          <form class="col s12">
+            <div class="row center">
+              <div class="input-field col s12">
+                <input type="text" id="textarea1" name="q" value="{{ request.GET.q }}" class="materialize-textarea">
+                <label for="textarea1">Título</label>
+              </div>
+              <button type="submit" name="action" class="waves-effect red darken-4 btn"><i class="material-icons left">search</i>Buscar</button>
+            </div>
+          </form>
+        </div>
+        <br><br>
+      </div>
+    </div>
+    <div class="parallax"><img src="https://wallpapers.com/images/hd/black-and-white-movie-1920-x-1080-wallpaper-vdy8ro9ojjodjlta.jpg" alt="Unsplashed background img 1"></div>
+  </div>
+{% endblock %}
+
+{% block content %}
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">movie</i></h2>
+            <h5 class="center">Busca la pelicula que quieras</h5>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">library_add</i></h2>
+            <h5 class="center">Guarda peliculas en tu Watchlist</h5>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">rate_review</i></h2>
+            <h5 class="center">Escribe tus reseñas</h5>
+          </div>
+        </div>
+      </div>
+{% endblock %}

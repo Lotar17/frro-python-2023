@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>MovieBlog</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <ul id="dropdown1" class="dropdown-content">
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'profile' user.username %}">Mi Perfil</a></li>
+        <li><a href="{% url 'change-password' %}">Cambiar contraseña</a></li>
+      {% endif %}
+    </ul>
+    <nav class ="red darken-4">
+      <div class="nav-wrapper">
+        <a href="{% url 'index' %}" class="brand-logo white-text" style="padding: 0px 0px 0px 20px">MovieBlog</a>
+        <ul class="right hide-on-med-and-down">
+          <!-- Dropdown Trigger -->
+          {% if user.is_authenticated %}
+            <li>
+              <a class="dropdown-trigger white-text" href="#!" data-target="dropdown1">{{ user.username }}
+                <i class="material-icons right">arrow_drop_down</i>
+              </a>
+            </li>
+            <li>
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="white-text" style="background-color: Transparent; background-repeat:no-repeat; border: none; cursor:pointer; overflow: hidden;">logout</button>
+              </form>
+            </li>
+          {% else %}
+            <li>
+              <a href="{% url 'login' %}" class="white-text">Ingresar</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+  {% block banner %}
+  {% endblock %}
+
+    <div class="container">
+      <div class="section">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+
+    <footer class="page-footer red darken-2" style="position:relative;bottom:0;left:0;width:100%;">
+      <div class="container">
+        <div class="row">
+          <p class="center bold">©2024 - Trabajo Practico para la materia de Soporte a la Gestion de Datos con Programacion Visual</p>
+        </div>
+      </div>
+    </footer>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static 'js/materialize.js' %}"></script>
+  <script src="{% static 'js/init.js' %}"></script>
+
+  <script>
+    $(document).ready(function(){
+        $('.modal').modal();
+        $('.dropdown-trigger').dropdown();
+    });
+  </script>
+
+  </body>
+</html>
+
+
